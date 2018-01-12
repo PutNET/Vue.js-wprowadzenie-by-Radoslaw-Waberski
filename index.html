@@ -1,0 +1,666 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>vue.js_intro</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/vue.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!-- include Vue -->
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides" id="app">
+				<section>
+					<img src="./assets/vue.png" alt="vue">
+					<h2>Vue.js</h2>
+					<h6>Radosław Waberski</h6>
+				</section>
+
+				<section class="about_me">
+						<div class="about__container">
+							<div class="about__info">
+								<p class="blue">Radosław Waberski</p>
+								<hr>
+								<p class="blue additional-info">Front-End Developer</p>
+								<p class="blue additional-info">Komputronik Biznes</p>
+								<hr>
+								<!-- <p class="green additional-info">radoslaw.waberski@komputronik-biznes.pl</p> -->
+								<p class="green additional-info">rjwaberski@gmail.com</p>
+							</div>
+							<div class="about__avatar">
+								<img src="./assets/avatar.jpg" alt="avatar" class="flat-shadow">
+							</div>
+						</div>
+					</section>
+
+
+				<section>
+					<ol><p class="blue">let's talk about:</p>
+						<li class="fragment">what is vue</li>
+						<li class="fragment">components</li>
+						<li class="fragment">directives</li>
+						<li class="fragment">component lifecycle</li>
+						<li class="fragment">single file components</li>
+					</ol>
+				</section>
+
+
+				<section class="about_vue">
+					<section>
+						<h1>Vue.js</h1>
+						<h3 class="fragment">the progressive framework</h3>
+						<span class="fragment">
+							<img src="./assets/evanyou.jpg" alt="evanyou" class="flat-shadow">
+							<p>by this guy</p>
+							<small class="fragment blue"><p>Yuxi (E<span class="fragment highlight-red">v</span>an) <span class="fragment highlight-red">You</span></p></small>
+						</span>
+
+						<aside class="notes">
+							<p>MIT-licensed open source project</p>
+							<p>Evan You</p>
+							<p>2013-present</p>
+							<p>Progressive framework for building user interfaces.</p>
+							<p>It is designed from the ground up to be incrementally adoptable, and can easily scale between a library and a framework depending on different use cases</p>
+							<p>library for building interactive web interfaces</p>
+						</aside>
+					</section>
+					<section>
+						<h3>Progressive Framework</h3>
+						<span class="fragment">
+								<p>1. lean core that works well alone</p>
+								<small>declarative view rendering</small>
+						</span>
+						<span class="fragment">
+								<p>2. official support libraries that solve common needs</p>
+								<small>SPA routing, data fetching, state management</small>
+						</span>
+						<span class="fragment">
+								<p>3 .opinionated but optional build toolchain</p>
+								<small>scaffolding, bundling, linting, testing, hot-reloading, devtools...</small>
+						</span>
+						
+						<small class="blue fragment">(source: <a href="http://slides.com/evanyou/progressive-javascript#">http://slides.com/evanyou/progressive-javascript#</a> )</small>
+					</section>
+					<section>
+						<p class="blue">'but will it work with IE?'</p>
+						<img src="./assets/compability.png" alt="github" class="fragment">
+
+						<aside class="notes">
+							<p>Vue.js supports all browsers that are ES5-compliant (IE8 and below are not supported).</p>
+						</aside>
+					</section>
+					<section>
+						<h3 class="blue">why vue?</h3>
+						<ul>
+							<li>approachable</li>
+							<li>versatile</li>
+							<li>performant</li>
+							<li>maintanable</li>
+							<li>testable</li>
+						</ul>
+
+						<aside class="notes">
+							<p>przystępny</p>
+							<p>wszechstronny</p>
+							<p>wydajny (?)</p>
+							<p>dający się utrzymać</p>
+							<p>testowalny</p>
+						</aside>
+					</section>
+					<section>
+						<h1>Vue</h1>
+							<h3 class="fragment green">+</h3>
+							<h2 class="fragment">Vuex</h2>
+							<h3 class="fragment green">+</h3>
+							<h2 class="fragment">vue-router</h2>
+
+							<aside class="notes">
+								<h3>ecosystem of supporting libraries</h3>
+								<p>vuex - centralized state management; state management pattern + library for Vue.js applications</p>
+								<p>vue-router - official vue library for routing</p>
+							</aside>
+					</section>
+					<section>
+						<h5>vue ecosystem</h5>
+						<img src="./assets/ecosystem.png" alt="ecosystem">
+					</section>
+					<section>
+						<p>core library focuses on view layer only</p>
+						<p>20KB</p>
+					</section>
+					<section>
+							<ol><h5>how to get vue?</h5>
+								<li class="fragment">
+									<p>cdn</p>
+									<pre class="fragment"><code class="hljs" data-trim contenteditable>
+											&lt;script src="https://cdn.jsdelivr.net/npm/vue"&gt;&lt;/script&gt;
+									</code></pre>
+								</li>
+								<li class="fragment">
+									<b>
+										<a href="https://github.com/vuejs/vue-cli" target="_blank" class=" fragment">vue-cli</a>
+									</b>
+								</li>
+							</ol>
+						</section>
+					<section>
+						<h5>simple vue app</h5>
+						<pre>
+							<code class="hljs" data-trim contenteditable>
+<div id="app">
+  { { message } }
+</div>
+							</code>
+						</pre>
+
+						<pre>
+							<code class="hljs" data-trim contenteditable>
+new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!'
+  }
+})
+							</code>
+						</pre>
+						<aside class="notes">
+							<p>every Vue instance is a ViewModel</p>
+							<h6>Declarative Rendering</h6>
+							<p>At the core of Vue.js is a system that enables us to declaratively render data to the DOM using straightforward template syntax</p>
+						</aside>
+					</section>
+					<section>
+						<h3 class="blue">vue is reactive</h3>
+						<p class="fragment">{{ hello }}</p>
+					</section>
+					<section>
+						<h3>vue vs react vs angular</h3>
+						<img src="./assets/vuePower.jpg" alt="onlyVue" class="fragment">
+					</section>
+				</section>
+
+
+				<section class="components">
+					<section>
+						<h2>components</h2>
+						<img src="./assets/components.png" alt="components" class="fragment">
+
+						<aside class="notes">
+							<p>In Vue.js, every component is a Vue instance</p>
+							<p>Register component -> Vue.component, then use it</p>
+							<p>build large-scale applications composed of small, self-contained, and often reusable components</p>
+							<p>They help you extend basic HTML elements to encapsulate reusable code. At a high level, components are custom elements that Vue’s compiler attaches behavior to.</p>
+							
+						</aside>
+					</section>
+					<section>
+						<h3>the vue instance</h3>
+						<pre class="fragment"><code class="hljs" data-trim contenteditable>
+new Vue({
+  el: '#id',
+  data() {
+    return {...}
+  },
+  props: [...],
+  methods: {...},
+  computed: {...},
+  watch: {...}
+  // lifecycle events
+});
+						</code></pre>
+					</section>
+					<section>
+						<h3 class="blue">custom component</h3>
+						<pre class="fragment">
+							<code class="hljs" data-trim contenteditable>
+Vue.component('custom-component', {
+  template: `&lt;p&gt;this is my first vue component&lt;p&gt;`
+});
+							</code>
+						</pre>
+
+						<pre class="fragment">
+							<code class="hljs" data-trim contenteditable>
+&lt;custom-component&gt;&lt;/custom-component&gt;
+&lt;custom-component&gt;&lt;/custom-component&gt;
+&lt;custom-component&gt;&lt;/custom-component&gt;
+							</code>
+						</pre>
+					</section>
+					<section>
+							<custom-component></custom-component>
+							<custom-component></custom-component>
+							<custom-component></custom-component>
+					</section>
+					<section>
+						<h3>data must be a function</h3>
+						<img src="./assets/why.png" alt="whytho" class="fragment">
+					</section>
+					<section>
+						<p>these are lame counters:</p>
+						<lame-counter></lame-counter>
+						<lame-counter></lame-counter>
+						<lame-counter></lame-counter>
+						<pre>
+							<code class="hljs" data-trim contenteditable>
+const data = { counter: 0 };
+Vue.component('lame-counter', {
+  template: '&lt;button v-on:click="counter += 1"&gt;{ { counter } }&lt;/button&gt;',
+  data() {
+    return data
+  }
+ });
+							</code>
+						</pre>
+					</section>
+					<section>
+							<p>and these are pro counters:</p>
+							<pro-counter></pro-counter>
+							<pro-counter></pro-counter>
+							<pro-counter></pro-counter>
+							<pre>
+								<code>
+Vue.component('pro-counter', {
+  template: '&lt;button v-on:click="counter += 1"&gt;{ { counter } }&lt;/button&gt;',
+  data() {
+    return {
+      counter: 0
+	}
+  }
+});
+								</code>
+							</pre>
+					</section>
+					<section>
+						<h3>composing components</h3>
+						<h2 class="fragment green">props down, events up</h2>
+						<aside class="notes">
+							<p>Components are meant to be used together</p>
+							<p>the parent may need to pass data down to the child, and the child may need to inform the parent of something that happened in the child</p>
+						</aside>
+					</section>
+					<section>
+						<img src="./assets/props-events.png" alt="props-events">
+					</section>
+					<section>
+						<pre>
+							<code class="hljs" data-trim contenteditable>
+Vue.component('child', {
+  template: '&lt;p&gt;i got it from my daddy: { { present } }&lt;/p&gt;',
+  props: ['present']
+});
+							</code>
+						</pre>
+
+						<pre>
+							<code class="hljs" data-trim contenteditable>
+&lt;child :present="10$"&gt;&lt;/child&gt;
+&lt;child :present="10$"&gt;&lt;/child&gt;
+&lt;child :present="ugly face"&gt;&lt;/child&gt;
+							</code>
+						</pre>
+					</section>
+					<section>
+						<child :present="'10$'"></child>
+						<child :present="'100$'"></child>
+						<child :present="'ugly face'"></child>
+					</section>
+					<section>
+						<pre>
+							<code class="hljs" data-trim contenteditable>
+Vue.component('emit-counter', {
+  template: `
+    &lt;button @click="incrementCounter"&gt;{ { counter } }&lt;/button&gt;`,
+  data() {
+    return {
+      counter: 0
+    }
+  },
+  methods: {
+    incrementCounter() {
+      this.counter++;
+      this.$emit('increment');
+    }
+  }
+});
+							</code>
+						</pre>
+					</section>
+						<section>
+								<pre>
+									<code class="hljs" data-trim contenteditable>
+{ { total } }
+&lt;emit-counter @increment="incrementTotal"&gt;&lt;/emit-counter&gt;
+&lt;emit-counter @increment="incrementTotal"&gt;&lt;/emit-counter&gt;
+									</code>
+								</pre>
+
+								<pre>
+									<code class="hljs" data-trim contenteditable>
+...
+methods: {
+  incrementTotal() {
+    this.total++;
+  }
+}
+...
+									</code>
+								</pre>
+					</section>
+					<section>
+						{{ total }}
+
+						<br>
+						<emit-counter @increment="incrementTotal"></emit-counter>
+						<emit-counter @increment="incrementTotal"></emit-counter>
+					</section>
+					<section>
+						<h3>computed properties and watchers</h3>
+					</section>
+					<section>
+						<h4>computed properties</h4>
+						<pre><code class="hljs" data-trim contenteditable>
+...
+data(){
+	return { todos: ['nothing', 'nothing again', 'still nothing']}
+}
+computed: {
+  howMuchShouldIDo() {
+    return `you have only ${this.todos.length} things to do!`;
+  }
+}
+...
+						</code></pre>
+					</section>
+					<section>
+						<h4>watchers</h4>
+						<pre><code class="hljs" data-trim contenteditable>
+...
+data(){
+  return { todos: ['nothing', 'nothing again', 'still nothing']}
+}
+watch: {
+  todos(val) {
+    if (val > 10) alert('you have definitely too much things to do!');
+  }
+}
+						</code></pre>
+					</section>
+				</section>
+
+
+				<!-- is this me you're looking for? -->
+				<section class="directives">
+					<section>
+						<ol><h2 class="blue">directives:</h2>
+							<li class="fragment">v-if</li>
+							<li class="fragment">v-for</li>
+							<li class="fragment">v-on</li>
+							<li class="fragment">v-bind</li>
+							<li class="fragment">v-model</li>
+							<span class="fragment blue">and more...</span>
+						</ol>
+					</section>
+					<aside class="notes">
+						<p>Prefixed HTML attributes that tell Vue.js to do something about a DOM element.</p>
+					</aside>
+					<section>
+						<h2>v-if</h2>
+						<pre>
+							<code>
+&lt;p v-if="someCondition"&gt;not rendered (yet)&lt;/p&gt;
+							</code>
+						</pre>
+						<pre>
+							<code>
+...
+data() {
+  someCondition: false
+}
+...
+							</code>
+						</pre>
+
+						<aside class="notes">
+							<p>
+								v-if - does not render
+							</p>
+							<p>
+								v-show - renders, but display: none
+							</p>
+						</aside>
+					</section>
+					<section>
+						<h5>v-if example</h5>
+						<p v-if="condition.if">show me, homie</p>
+						<p v-show="condition.show">i'm just hidden, but rendered!</p>
+					</section>
+					<section>
+						<h2>v-for</h2>
+						<pre>
+							<code data-trim contenteditable>
+&lt;ol&gt;
+  &lt;li v-for task from emergencyInstructions&gt;{ { task } }&lt;/li&gt;
+&lt;/ol&gt;
+							</code>
+						</pre>
+						<pre>
+							<code>
+...
+data() {
+  return {
+   emergencyInstructions: ['lie down', 'try not to cry', 'cry a lot']
+  }
+}
+...
+							</code>
+						</pre>
+						<aside class="notes">
+							remove spacebars
+						</aside>
+					</section>
+					<section>
+						<ol>
+							<li v-for="task in emergencyInstructions">{{ task }}</li>
+						</ol>
+					</section>
+					<section>
+						<h5>v-for example</h5>
+						<ul class="fragment">todo:
+							<li v-for="task in todo">{{ task }}</li>
+						</ul>
+					</section>
+					<section>
+						<h2>v-on</h2>
+						<pre>
+							<code>
+&lt;input type="button" value="click me" v-on:click="onClick"&gt;
+							</code>
+						</pre>
+						<pre>
+							<code>
+...
+methods: {
+  onClick() {
+    alert('handle click');
+  }
+}
+							</code>
+						</pre>
+					<aside class="notes">
+						v-on == @
+					</aside>
+					</section>
+					<section>
+						<input type="button" value="click me" @click="onClick">
+					</section>
+					<section>
+						<h5>v-on example</h5>
+						<p>{{ hello }}</p>
+						<input type="button" value="Mark" @click="hi"/>
+					</section>
+
+					<section>
+						<h2>v-model</h2>
+						<pre>
+							<code>
+&lt;input type="text" v-model="model"&gt;
+							</code>
+						</pre>
+						<pre>
+							<code>
+...
+data() {
+  return {
+    model: ''
+  }
+}
+							</code>
+						</pre>
+					</section>
+					<section>
+						<h5>v-model example</h5>
+						<input type="text" v-model="model">
+						<p>{{ model }}</p>
+					</section>
+
+					<section>
+						<h2>v-bind</h2>
+						<pre>
+							<code data-trim contenteditable>
+&lt;fieldset-custom
+  v-bind:title="fieldset.title"
+  v-bind:source="fieldset.source"&gt;
+&lt;/fieldset-custom&gt;
+							</code>
+						</pre>
+						<pre>
+							<code data-trim contenteditable>
+Vue.component('fieldset-custom', {
+  template: `
+    &lt;fieldset&gt;
+    &lt;legend&gt;{ { title } }</legend>
+	  &lt;a :href="source" target="blank"&gt;{ { source } }&lt;/a&gt;
+    &lt;/fieldset&gt;`,
+
+	props: [
+		'source',
+		'title'
+	]
+});
+							</code>
+						</pre>
+					</section>
+					<section>
+						<fieldset-custom :title="fieldset.title" :source="fieldset.source"></fieldset-custom>
+					</section>
+				</section>
+
+
+				<section class="lifecycle">
+					<section>
+						<h2>lifecycle</h2>
+					</section>
+					<section>
+						<img src="./assets/lifecycle.png" alt="lifecycle" class="contain">
+					</section>
+					<section>
+						<h3>lifecycle events</h3>
+						<ol>
+							<li class="fragment">beforeCreate()</li>
+							<li class="fragment">created()</li>
+							<li class="fragment">beforeMount()</li>
+							<li class="fragment">mounted()</li>
+							<li class="fragment">beforeUpdate()</li>
+							<li class="fragment">updated()</li>
+							<li class="fragment">beforeDestroy()</li>
+							<li class="fragment">destroyed()</li>
+						</ol>
+					</section>
+					<section>
+						<h3>get data from api on created()</h3>
+						<pre><code>
+data(){
+  return { photos: [] }
+}
+created() {
+  const scope = this;
+  axios.get(`https://jsonplaceholder.typicode.com/photos?albumId=2`)
+  .then(response => {
+    scope.photos = response.data;
+  })
+  .catch(error => {
+    console.log(error);
+  });
+						</code></pre>
+					</section>
+				</section>
+
+				<section class="sfc">
+					<section>
+						<h2>single file components</h2>
+						<fieldset class="fragment">
+							<legend class="blue">component.vue</legend>
+							<p class="fragment">html</p>
+							<p class="fragment">js</p>
+							<p class="fragment">css</p>
+						</fieldset>
+					</section>
+					<section class="demo">
+						<img src="/assets/demoTime.jpg" alt="demo" class="flat-shadow">
+					</section>
+				</section>
+
+
+				<section class="learning">
+					<fieldset-custom title="official docs" source="https://vuejs.org"></fieldset-custom>
+					<fieldset-custom title="udemy" source="https://www.udemy.com/vuejs-2-the-complete-guide/"></fieldset-custom>
+				</section>
+
+				<section>
+					Q&A
+				</section>
+			</div>
+		</div>
+
+		<!-- import scripts -->
+		<script src="main.js"></script>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				transition: 'convex',
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+
+				]
+			});
+		</script>
+	</body>
+</html>

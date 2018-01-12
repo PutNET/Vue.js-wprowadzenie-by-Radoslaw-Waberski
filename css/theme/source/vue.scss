@@ -1,0 +1,138 @@
+/**
+ * Black theme for reveal.js. This is the opposite of the 'white' theme.
+ *
+ * By Hakim El Hattab, http://hakim.se
+ */
+
+
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+
+// Include theme-specific fonts
+@import url(../../lib/font/source-sans-pro/source-sans-pro.css);
+
+
+// Override theme settings (see ../template/settings.scss)
+$backgroundColor: #fff;
+
+$mainColor: #42b983;
+$headingColor: #34495e; //#34495e
+
+$mainFontSize: 42px;
+$mainFont: 'Source Sans Pro', Helvetica, sans-serif;
+$headingFont: 'Source Sans Pro', Helvetica, sans-serif;
+$headingTextShadow: none;
+$headingLetterSpacing: normal;
+$headingTextTransform: uppercase;
+$headingFontWeight: 600;
+$linkColor: #42b983;
+$linkColorHover: lighten( $linkColor, 15% );
+$selectionBackgroundColor: lighten( $linkColor, 25% );
+
+$heading1Size: 2.5em;
+$heading2Size: 1.6em;
+$heading3Size: 1.3em;
+$heading4Size: 1.0em;
+
+$blue: #34495e;
+$green: #42b983;
+
+section.has-light-background {
+	&, h1, h2, h3, h4, h5, h6 {
+		color: #222;
+	}
+}
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
+
+.reveal {
+	& h1, h2, h3, h4, h5, h6 {
+		text-transform: none;
+		font-weight: normal;
+	}
+
+	& .bold {
+		font-weight: bold;
+	}
+
+	& .blue {
+		color: $blue;
+	}
+
+	& .green {
+		color: $green;
+	}
+
+	& section img {
+		border: none;
+		box-shadow: none;
+	}
+
+	& img.contain {
+		max-height: 100vh;
+	}
+
+	& fieldset {
+		border: 1px solid #888;
+		padding: 10px;
+
+		& legend {
+			font-size: 2rem;
+			padding: 0 10px 0 10px;
+		}
+
+		& a {
+			color: $blue;
+		}
+	}
+
+	& pre {
+		width: 100%;
+		box-shadow: none;
+	}
+
+	.flat-shadow {
+		box-shadow: 0 10px 30px 0 rgba(0,0,0,.5) !important;
+	  }
+}
+
+.about_me {
+	width: 50%;
+
+	&>p {
+		text-transform: none;
+		text-align: right;
+	}
+
+	& .about__container {
+		display: flex;
+		justify-content: space-between;
+		
+		& .about__avatar {
+			width: 25%;
+			height: auto;
+		}
+
+		& .about__info {
+			text-align: left;
+
+			& .additional-info {
+				font-size: .6em;
+				line-height: 1.2em;
+				margin: 0;
+			}
+		}
+	}
+}
+
+.about_vue {
+	& img {
+		height: 20vh;
+	}
+}
+
